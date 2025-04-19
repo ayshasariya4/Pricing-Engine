@@ -41,7 +41,8 @@ def apply_pricing_rules(row):
 merged_df['new_price'] = merged_df.apply(apply_pricing_rules, axis=1)
 
 # Prepare final output with units
-output_df = merged_df[['sku', 'current_price', 'new_price']]
+output_df = merged_df[['sku', 'current_price', 'new_price']].copy()
+
 output_df.rename(columns={'current_price': 'old_price'}, inplace=True)
 output_df['old_price'] = output_df['old_price'].apply(lambda x: f"${x:.2f}")
 output_df['new_price'] = output_df['new_price'].apply(lambda x: f"${x:.2f}")
